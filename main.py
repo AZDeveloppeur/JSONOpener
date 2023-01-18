@@ -1,9 +1,16 @@
+from tkinter.filedialog import askopenfilename
+filename = askopenfilename()
+
 import json
 from window import window
 from tkinter import *
 
-path = "C:\\Users\\apoll\\Desktop\\Dev\\NewAltis\\server-data\\resources\\[dev]\\Altis\\data"
-file = open(path + "\\players.json", "r+")
+#path = "C:\\Users\\apoll\\Desktop\\Dev\\NewAltis\\server-data\\resources\\[dev]\\Altis\\data"
+#file = open(path + "\\players.json", "r+")
+if not filename:
+    exit()
+
+file = open(filename, "r+")
 file_dict = json.load(file)
 
 text = {}
@@ -23,6 +30,8 @@ var = {}
 
 def save():
     global frame
+    global modifiedtable
+    modifiedtable = {}
     if name != "":
         for i in frame.children:
             if "label" in i:
@@ -30,7 +39,8 @@ def save():
                 modifiedtable[id] = var[id].get()
         file_dict[name] = modifiedtable
         #print(json.dumps(file_dict))
-        open(path + "\\players.json", "w+").write(json.dumps(file_dict))
+        #open(path + "\\players.json", "w+").write(json.dumps(file_dict))
+        open(filename, "w+").write(json.dumps(file_dict))
 
 btn = Button(text="Save", command=save, bg="#111", foreground="white")
 btn.pack()
