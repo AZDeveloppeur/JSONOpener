@@ -1,26 +1,22 @@
 import json
-import time
+from window import window
 from tkinter import *
 
 path = "C:\\Users\\apoll\\Desktop\\Dev\\NewAltis\\server-data\\resources\\[dev]\\Altis\\data"
 file = open(path + "\\players.json", "r+")
 file_dict = json.load(file)
 
-window = Tk()
-window.title("JSON Open App")
-window.geometry("1090x900")
-
 text = {}
 name = ""
 modifiedtable = {}
 
-state = Label(text="State : Good")
+state = Label(text="State : Good", bg="#111", foreground="white")
 state.pack()
 
-lb = Listbox()
+lb = Listbox(bg="#111", foreground="white")
 lb.pack()
 
-frame = Frame()
+frame = Frame(bg="#111")
 frame.pack()
 
 var = {}
@@ -36,7 +32,7 @@ def save():
         #print(json.dumps(file_dict))
         open(path + "\\players.json", "w+").write(json.dumps(file_dict))
 
-btn = Button(text="Save", command=save)
+btn = Button(text="Save", command=save, bg="#111", foreground="white")
 btn.pack()
 
 for i in file_dict:
@@ -47,13 +43,13 @@ def lab(ind):
     global frame
     if name != ind:
         frame.destroy()
-        frame = Frame()
+        frame = Frame(bg="#111")
         frame.pack()
         for i in file_dict[ind]:
-            text = Label(frame, text=i + " : ")
+            text = Label(frame, text=i + " : ", bg="#111", foreground="white")
             text.pack()
             var[i] = StringVar()
-            input_ = Entry(frame, textvariable=var[i])
+            input_ = Entry(frame, textvariable=var[i], bg="#111", foreground="white")
             input_.pack()
             input_.insert(0, file_dict[ind][i])
         name = ind
