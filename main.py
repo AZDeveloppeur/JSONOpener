@@ -6,7 +6,7 @@ file = open(path + "\\players.json")
 file_dict = json.load(file)
 
 window = Tk()
-window.title("test")
+window.title("JSON Open App")
 window.geometry("1090x600")
 lb = Listbox()
 frame = Frame()
