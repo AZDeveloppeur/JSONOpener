@@ -65,12 +65,13 @@ def lab(ind):
             frame = Frame(bg=config.background)
             frame.pack()
             for i in file_dict:
-                text = Label(frame, text=i + " : ", bg=config.background, foreground=config.foreground)
-                text.pack()
-                var[i] = StringVar()
-                input_ = Entry(frame, textvariable=var[i], width=100)
-                input_.pack()
-                input_.insert(0, file_dict[i])
+                if not "dict" in str(type(file_dict[i])):
+                    text = Label(frame, text=i + " : ", bg=config.background, foreground=config.foreground)
+                    text.pack()
+                    var[i] = StringVar()
+                    input_ = Entry(frame, textvariable=var[i], width=100)
+                    input_.pack()
+                    input_.insert(0, file_dict[i])
             name = ind
 
 for i in file_dict:

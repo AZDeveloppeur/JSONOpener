@@ -1,1 +1,19 @@
-{"name": "jsonopener", "version": "1.0.0", "description": "App to open json file and render value of file in GUI", "main": "main.py", "scripts": {"start": "py main.py"}, "repository": {"type": "git", "url": "git+https://github.com/AZDeveloppeur/JSONOpener.git"}, "author": ".AZ", "license": "ISC", "bugs": {"url": "https://github.com/AZDeveloppeur/JSONOpener/issues"}, "homepage": "https://github.com/AZDeveloppeur/JSONOpener#readme"}
+{
+    "name": "jsonopener",
+    "version": "1.0.0",
+    "description": "App to open json file and render value of file in GUI",
+    "main": "main.py",
+    "scripts": {
+        "start": "py main.py"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AZDeveloppeur/JSONOpener.git"
+    },
+    "author": ".AZ",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AZDeveloppeur/JSONOpener/issues"
+    },
+    "homepage": "https://github.com/AZDeveloppeur/JSONOpener#readme"
+}
