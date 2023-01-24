@@ -1,6 +1,7 @@
 from tkinter import *
+import config
 
 window = Tk()
-window.title("JSON Open App")
-window.geometry("1090x900")
-window.configure(bg="#111")
+window.title(config.title)
+window.geometry(config.size)
+window.configure(bg=config.background)

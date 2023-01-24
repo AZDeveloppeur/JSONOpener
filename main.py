@@ -2,11 +2,10 @@ from tkinter.filedialog import askopenfilename
 filename = askopenfilename()
 
 import json
+import config
 from window import window
 from tkinter import *
 
-#path = "C:\\Users\\apoll\\Desktop\\Dev\\NewAltis\\server-data\\resources\\[dev]\\Altis\\data"
-#file = open(path + "\\players.json", "r+")
 if not filename:
     exit()
 
@@ -16,14 +15,15 @@ file_dict = json.load(file)
 text = {}
 name = ""
 modifiedtable = {}
+already_registered = False
 
-state = Label(text="State : Good", bg="#111", foreground="white")
+state = Label(text="State : Good", bg=config.background, foreground=config.foreground)
 state.pack()
 
-lb = Listbox(bg="#111", foreground="white")
+lb = Listbox(bg=config.background, foreground=config.foreground)
 lb.pack()
 
-frame = Frame(bg="#111")
+frame = Frame(bg=config.background)
 frame.pack()
 
 var = {}
@@ -38,31 +38,49 @@ def save():
                 id=frame.children[i].cget("text").replace(" : ", "")
                 modifiedtable[id] = var[id].get()
         file_dict[name] = modifiedtable
-        #print(json.dumps(file_dict))
-        #open(path + "\\players.json", "w+").write(json.dumps(file_dict))
         open(filename, "w+").write(json.dumps(file_dict))
 
-btn = Button(text="Save", command=save, bg="#111", foreground="white")
+btn = Button(text="Save", command=save, bg=config.background, foreground=config.foreground)
 btn.pack()
-
-for i in file_dict:
-    lb.insert(lb.size()+1, i)
 
 def lab(ind):
     global name
     global frame
-    if name != ind:
-        frame.destroy()
-        frame = Frame(bg="#111")
-        frame.pack()
-        for i in file_dict[ind]:
-            text = Label(frame, text=i + " : ", bg="#111", foreground="white")
-            text.pack()
-            var[i] = StringVar()
-            input_ = Entry(frame, textvariable=var[i], bg="#111", foreground="white")
-            input_.pack()
-            input_.insert(0, file_dict[ind][i])
-        name = ind
+    if ind != "main":
+        if name != ind:
+            frame.destroy()
+            frame = Frame(bg=config.background)
+            frame.pack()
+            for i in file_dict[ind]:
+                text = Label(frame, text=i + " : ", bg=config.background, foreground=config.foreground)
+                text.pack()
+                var[i] = StringVar()
+                input_ = Entry(frame, textvariable=var[i], width=100)
+                input_.pack()
+                input_.insert(0, file_dict[ind][i])
+            name = ind
+    else:
+        if name != ind:
+            frame.destroy()
+            frame = Frame(bg=config.background)
+            frame.pack()
+            for i in file_dict:
+                text = Label(frame, text=i + " : ", bg=config.background, foreground=config.foreground)
+                text.pack()
+                var[i] = StringVar()
+                input_ = Entry(frame, textvariable=var[i], width=100)
+                input_.pack()
+                input_.insert(0, file_dict[i])
+            name = ind
+
+for i in file_dict:
+    if "dict" in str(type(file_dict[i])):
+        lb.insert(lb.size()+1, i)
+    else:
+        if not already_registered:
+            lb.insert(lb.size()+1, "main")
+            already_registered = True
+        lab("main")
 
 def loop():
     if lb.curselection():
